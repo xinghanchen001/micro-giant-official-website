@@ -1,0 +1,22 @@
+# Apache configuration to allow iframe embedding
+
+# Remove X-Frame-Options header or set it to allow embedding
+Header always unset X-Frame-Options
+# Or use this to allow same origin only:
+# Header always set X-Frame-Options SAMEORIGIN
+
+# Set Content-Security-Policy to allow iframe embedding
+# This allows all domains to embed the site
+Header always set Content-Security-Policy "frame-ancestors 'self' *"
+
+# To allow only specific domains, use:
+# Header always set Content-Security-Policy "frame-ancestors 'self' https://yourdomain.com https://anotherdomain.com"
+
+# Additional security headers (optional)
+Header always set X-Content-Type-Options "nosniff"
+Header always set X-XSS-Protection "1; mode=block"
+
+# Enable CORS if needed
+Header set Access-Control-Allow-Origin "*"
+Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+Header set Access-Control-Allow-Headers "Content-Type"
